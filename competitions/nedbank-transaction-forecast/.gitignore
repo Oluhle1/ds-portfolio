@@ -1,0 +1,11 @@
+# Competition data stays off GitHub
+*.csv
+*.parquet
+*.xlsx
+*.zip
+Train.*
+Test.*
+SampleSubmission.*
+submission*.csv
+*.env
+.zindi*

@@ -1,0 +1,14 @@
+# Survey microdata and local extracts stay off GitHub
+*.csv
+*.parquet
+*.xlsx
+*.zip
+LCS2015*
+LCS Dataset.zip
+kzn_household_analysis.csv
+
+.env
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+grant_env/

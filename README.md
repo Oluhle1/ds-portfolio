@@ -5,7 +5,7 @@ Public write-ups for hiring. Claims stay inside what the files can prove.
 | Project | Status | What is in this repo |
 |---|---|---|
 | [Grant-outcome modelling](research/grant-prediction/) | Research — metrics to be filled | Methods note + folder for notebooks |
-| [Nedbank N*ovation / Zindi forecast](competitions/nedbank-transaction-forecast/) | Competition write-up | Approach note. **No Nedbank/Zindi data files** |
+| [Nedbank N*ovation / Zindi forecast](competitions/nedbank-transaction-forecast/) | Local 5-fold CV RMSLE 0.377504 (v28 4-model blend). Public LB not recorded | Notebooks + scripts. **No Nedbank/Zindi data files** |
 
 Related systems work lives in other repos:
 

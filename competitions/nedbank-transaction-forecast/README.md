@@ -1,14 +1,23 @@
 # Nedbank transaction-volume forecast (Zindi / N*ovation)
 
-Public write-up of work on Nedbank’s anonymised customer transaction forecast challenge hosted with Zindi as part of the N*ovation Data and Analytics Masters pathway.
+Zindi: [Nedbank Transaction Volume Forecasting Challenge](https://zindi.africa/). Handle **Oluhle**. Certificate dated 3 May 2026. Final board closed; points posted 18 May 2026.
 
-## What the challenge was
+## Official result (final leaderboard + certificate)
 
-Predict each customer’s bank-transaction **count** over a future three-month window from anonymised behavioural history (transaction history, monthly snapshots, demographics). Host metric: **RMSLE**. Training data was Nedbank/Zindi-provided and is **not republished here**.
+| | |
+|---|---|
+| Place | **89 / 251** (certificate: ranked top 50%) |
+| Public RMSLE | **0.38759** |
+| Private RMSLE | **0.38256** |
+| Submissions | 92 |
+| Track | Zindi data science / ML |
+| Finale / prize | Not claimed here |
 
-## Locked local results (from training log)
+Winner on the same final board (edwardrycroft): public 0.37499, private 0.35819. Gap to first on private is about 0.024 RMSLE. Do not round that into “close to first.”
 
-Device: CPU. Five folds. Blend chosen by SciPy weight search on CV.
+## Local CV (training log, not the leaderboard)
+
+Device: CPU. Five folds. SciPy blend used for the run that produced test preds.
 
 | Model | 5-fold CV RMSLE |
 |---|---|
@@ -17,54 +26,29 @@ Device: CPU. Five folds. Blend chosen by SciPy weight search on CV.
 | CatBoost | 0.37914 |
 | MLP | 0.40649 |
 | Ridge | 0.42034 |
-| **SciPy blend (used)** | **0.37403** |
-| Inverse-weight blend (not used) | 0.37659 |
+| SciPy blend | 0.37403 |
 
-Blend weights: LightGBM 0.4119, XGBoost 0.2529, CatBoost 0.1803, MLP 0.1548, Ridge **0.0**.
+Blend weights: LightGBM 0.4119, XGBoost 0.2529, CatBoost 0.1803, MLP 0.1548, Ridge 0.
 
-Full-data refit boosting rounds before test preds: CatBoost 1905, LightGBM 730, XGBoost 785.
+CV 0.374 vs private 0.383 is the honest generalisation gap. Fold 3 (~0.40) vs fold 4 (~0.35) already showed the CV was uneven.
 
-Per-fold RMSLE (same log):
+## Still open
 
-| Fold | CatBoost | LightGBM | XGBoost | Ridge | MLP |
-|---|---|---|---|---|---|
-| 1 | 0.38393 | 0.38129 | 0.38418 | 0.42123 | 0.41476 |
-| 2 | 0.37394 | 0.37305 | 0.37128 | 0.41034 | 0.39422 |
-| 3 | 0.40213 | 0.39334 | 0.39401 | 0.45620 | 0.43963 |
-| 4 | 0.34766 | 0.35099 | 0.34938 | 0.38445 | 0.37597 |
-| 5 | 0.38594 | 0.38521 | 0.38687 | 0.42625 | 0.40512 |
+- Split type for those five folds: `[KFold vs time / group]` — say which in an interview
+- Dumb baseline RMSLE: `[METRIC NEEDED]`
 
-Fold 3 is the hard fold; fold 4 is the easy fold. That spread is part of the result, not noise to hide.
+## Claims that are now allowed
 
-## Still not locked — do not invent
+- Completed the Nedbank/Zindi 3-month transaction-count forecast (RMSLE)
+- Finished **89th of 251**, private RMSLE **0.383**, public **0.388**
+- Local blend CV RMSLE 0.374; private score was worse than CV
 
-- Split type: `[KFold vs time / group split]` — say which, or the CV number is weaker than it looks
-- Dumb baseline RMSLE (per-customer historical 3-month mean): `[METRIC NEEDED]`
-- Public leaderboard RMSLE: `[METRIC NEEDED]`
-- Private / final RMSLE: `[METRIC NEEDED]`
-- Zindi handle / team name: `[ ]`
-- Finale invite: `[yes / no]`
-- Track: assume Zindi DS/ML unless you say Otinga DE
+## Claims that are still forbidden
 
-CV 0.374 is **not** a competition place and **not** a production SLA.
-
-## What the log already supports in an interview
-
-- Ensemble of tree boosters plus a small MLP; linear ridge added no weight
-- Blend beat every single model on the same CV (0.374 vs best single 0.377)
-- Refit on full train after CV, then write test predictions — standard competition close
-- You should be ready to explain whether folds were time-safe. If they were random KFold on customers with a future window target, say that out loud
+- Finalist, prize, or Nedbank hire
+- “Top of the board” / “near first”
+- Publishing Train/Test customer files
 
 ## Layout
 
-```
-competitions/nedbank-transaction-forecast/
-  README.md
-  notebooks/     feature + model notebooks (no raw CSVs)
-  src/
-  reports/
-```
-
-## Do not commit
-
-Train/Test extracts, submission CSVs with customer rows, Zindi tokens.
+Notebooks and scripts only under `notebooks/` and `src/`. No raw CSVs.

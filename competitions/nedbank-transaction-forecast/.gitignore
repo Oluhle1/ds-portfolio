@@ -9,3 +9,6 @@ SampleSubmission.*
 submission*.csv
 *.env
 .zindi*
+__pycache__/
+.ipynb_checkpoints/
+.venv/
